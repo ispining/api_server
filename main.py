@@ -1,16 +1,29 @@
-# This is a sample Python script.
+"""
+API for PowerSport CRM system...
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+"""
+
+from flask import Flask
+from flask import request, jsonify
+import psycopg2
+
+def  db_use() -> psycopg2:
+    db = psycopg2.connect(database="powersport", user="postgres", password="armageddon", host="localhost", port=5432)
+    sql = db.cursor()
+    return db, sql
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+app = Flask(__name__)
+
+@app.route('/')
+def main_request():
+    #db, sql = db_use()
+    input_username = request.args.get('username')
+    input_password = request.args.get('password')
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    return str("PASS")
+
+app.run()
